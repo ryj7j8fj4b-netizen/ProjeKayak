@@ -9,49 +9,72 @@
 @media (prefers-color-scheme:dark){:root{--bg:#0e1820;--card:#15242e;--ink:#e8eef2;--mut:#9aabb7;--line:#25384a;--acc:#5aa9dc;--warn:#ffc77a;--warnbg:#3a2a10;--okbg:#14303f}}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-#app{max-width:520px;margin:0 auto;padding:14px 14px 40px}
-h1{font-size:19px;margin:0 0 10px}
-h2{font-size:14px;margin:18px 0 8px;text-transform:uppercase;letter-spacing:.04em;color:var(--mut)}
-button,select{font:inherit;color:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.35 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+#app{max-width:480px;margin:0 auto;padding:10px 10px 14px}
+button,select,summary{font:inherit;color:inherit}
 button{cursor:pointer;border:0;background:none;padding:0;text-align:left}
-.banner{border-radius:10px;padding:8px 10px;font-size:13px;margin-bottom:12px}
-.banner.demo{background:var(--warnbg);color:var(--warn)}
-.banner.live{background:var(--okbg);color:var(--ink)}
-select{width:100%;padding:11px 10px;border:1px solid var(--line);border-radius:10px;background:var(--card)}
-.seg{display:flex;gap:6px;margin:10px 0}
-.seg button{flex:1;text-align:center;padding:9px 4px;border:1px solid var(--line);border-radius:10px;background:var(--card);font-size:13px}
+.top{display:flex;gap:6px}
+.top select{flex:1;min-width:0;height:38px;padding:0 8px;border:1px solid var(--line);border-radius:10px;background:var(--card)}
+.ib{height:38px;padding:0 10px;border:1px solid var(--line);border-radius:10px;background:var(--card);display:flex;align-items:center;white-space:nowrap;font-size:13px}
+.ib.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.status{font-size:11.5px;margin:5px 2px 0;color:var(--mut)}
+.status.demo{color:var(--warn);background:var(--warnbg);border-radius:8px;padding:3px 8px;margin:6px 0 0}
+.seg{display:flex;gap:5px;margin:6px 0}
+.seg button{flex:1;text-align:center;height:30px;border:1px solid var(--line);border-radius:9px;background:var(--card);font-size:12.5px}
 .seg button.on{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
-.tabs{display:flex;border-bottom:1px solid var(--line);margin:14px 0 0}
-.tabs button{flex:1;text-align:center;padding:10px;border-bottom:3px solid transparent;color:var(--mut)}
-.tabs button.on{border-color:var(--acc);color:var(--ink);font-weight:600}
-.card,.row{display:flex;align-items:center;gap:10px;width:100%;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px;margin-bottom:8px}
-.rk{width:22px;font-weight:700;color:var(--mut);text-align:center}
-.cd{flex:1;display:flex;flex-direction:column;min-width:0}
-.mut{color:var(--mut)}.sm{font-size:12.5px}
-.sc{min-width:48px;text-align:center;font-weight:700;font-size:18px;border-radius:10px;padding:8px 0}
-.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
-.tile{display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:9px;padding:6px 0;border:2px solid transparent;min-height:62px;text-align:center}
-.tile .tw{font-size:11px;opacity:.85}.tile .td{font-size:13px}.tile .ts{font-size:16px;font-weight:700}
+.hero{display:flex;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px}
+.hl{display:flex;flex-direction:column;align-items:center;gap:4px;width:64px;flex:none}
+.ring{width:60px;height:60px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:800}
+.lab{font-size:11.5px;font-weight:600;text-align:center}
+.hr{flex:1;min-width:0;display:flex;flex-direction:column;gap:5px}
+.hd{display:flex;justify-content:space-between;align-items:baseline;gap:6px}
+.hd b{font-size:15px}
+.hd span{font-size:12px;color:var(--mut)}
+.chips{display:flex;flex-wrap:wrap;gap:4px}
+.chip{display:inline-flex;align-items:center;gap:4px;font-size:12px;padding:3px 7px;border-radius:999px;background:var(--okbg)}
+.chip.h{background:var(--warnbg);color:var(--warn)}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block;border:1px solid rgba(128,128,128,.5)}
+.met{font-size:12.5px;color:var(--mut)}
+.gog{font-size:12.5px;display:flex;align-items:center;gap:6px}
+.tip{margin:6px 2px 0;font-size:12.5px;color:var(--mut)}
+.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:8px}
+.tile{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:9px;height:46px;border:2px solid transparent;text-align:center;line-height:1.1}
+.tile .tw{font-size:10.5px;opacity:.9}.tile .ts{font-size:16px;font-weight:700}
+.tile .star{font-size:9px;font-style:normal;vertical-align:super;margin-left:1px}
 .tile.lowc{border:2px dashed var(--mut)}
 .tile.sel{outline:3px solid var(--ink);outline-offset:1px}
-.legend{font-size:12px;color:var(--mut);margin:6px 0 0}
-.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px}
-.panel header{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px}
-.fac{display:grid;grid-template-columns:92px 1fr;gap:2px 10px;align-items:center;margin:6px 0}
-.fac .bar{height:8px;background:var(--line);border-radius:4px;overflow:hidden}
+.legend{font-size:11px;color:var(--mut);margin:4px 2px 0}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px 10px;margin-top:8px}
+.facs{display:grid;grid-template-columns:1fr 1fr;gap:6px 14px}
+.fac .t{display:flex;justify-content:space-between;font-size:12px}
+.fac .t span:last-child{color:var(--mut)}
+.fac .bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden;margin-top:2px}
 .fac .bar i{display:block;height:100%;background:var(--acc)}
-.fac small{grid-column:2;color:var(--mut);font-size:12px}
-.hours{display:flex;gap:4px;align-items:flex-end;height:84px;margin-top:6px}
-.hb{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;height:100%}
+.hours{display:flex;gap:3px;height:52px;margin-top:8px}
+.hb{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px}
 .hb .b{flex:1;width:100%;display:flex;align-items:flex-end}
-.hb i{display:block;width:100%;background:var(--acc);opacity:.4;border-radius:3px 3px 0 0}
+.hb i{display:block;width:100%;background:var(--acc);opacity:.35;border-radius:3px 3px 0 0}
 .hb.w i{opacity:1}
-.hb span{font-size:11px;color:var(--mut)}
-.note{font-size:12.5px;color:var(--mut);margin-top:6px}
-.warn{background:var(--warnbg);color:var(--warn);border-radius:10px;padding:8px 10px;font-size:13px}
-footer{margin-top:22px;font-size:12px;color:var(--mut)}
-footer p{margin:4px 0}
+.hb span{font-size:10px;color:var(--mut)}
+.hcap{font-size:11px;color:var(--mut);margin-top:3px}
+.links{display:flex;gap:6px;margin-top:8px}
+.links a,.links summary{flex:1;text-align:center;padding:8px 4px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);text-decoration:none;font-size:12.5px;list-style:none;cursor:pointer}
+.links summary::-webkit-details-marker{display:none}
+.notes{margin-top:6px;font-size:11.5px;color:var(--mut)}
+.notes p{margin:3px 0}
+.row{display:flex;align-items:center;gap:8px;width:100%;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:7px 9px;margin-top:6px}
+.cd{flex:1;display:flex;flex-direction:column;min-width:0}
+.mut{color:var(--mut)}.sm{font-size:12px}
+.sc{min-width:44px;text-align:center;font-weight:700;font-size:17px;border-radius:9px;padding:7px 0}
+.rsel{margin-top:8px;display:block;width:100%;height:38px;padding:0 8px;border:1px solid var(--line);border-radius:10px;background:var(--card)}
+.warn{background:var(--warnbg);color:var(--warn);border-radius:10px;padding:6px 9px;font-size:12.5px;margin-top:6px}
+
+.trv .trh{display:flex;align-items:center;gap:6px;margin-bottom:5px}
+.trv .trh span{flex:1;font-size:12px;color:var(--mut)}
+.trv select{height:30px;padding:0 4px;border:1px solid var(--line);border-radius:8px;background:var(--card);font-size:12.5px}
+.trv .tr1{font-size:13.5px}
+.trv .tr1 a{font-size:12px;color:var(--acc);margin-left:6px}
+.trv .tr2{font-size:12px;color:var(--mut);margin-top:1px}
 
 </style>
 </head>
@@ -89,8 +112,22 @@ footer p{margin:4px 0}
 
   const DAY_START = 9;
   const DAY_HOURS = 8; // 09:00..16:00
-  const PEAK_MD = ['12-31', '01-01', '01-02']; // tatil tarihleri buraya eklenebilir
   const CROWD_BY_DOW = [0.35, 0.9, 1, 1, 0.95, 0.75, 0.2]; // Paz..Cmt
+  // Kaynak: MEB 2026-2027 çalışma takvimi. 'peak': yılbaşı, 'school': okul tatili.
+  const HOLIDAYS = [
+    ['2026-12-31', '2027-01-02', 'peak'],
+    ['2027-01-25', '2027-02-05', 'school'], // yarıyıl tatili
+    ['2027-03-08', '2027-03-12', 'school'] // 2. ara tatil (Ramazan Bayramı dönemi)
+  ];
+
+  const SNOW_TYPES = {
+    yok: { label: 'Kar yok', q: 1 },
+    toz: { label: 'Toz kar', q: 1 },
+    'sıkışık': { label: 'Sıkışık kar', q: 1 },
+    'yumuşak': { label: 'Yumuşak kar', q: 0.95 },
+    buzlu: { label: 'Buzlu pist', q: 0.85 },
+    islak: { label: 'Islak kar', q: 0.85 }
+  };
 
   const tempScore = t => (t >= -3 ? 1 - ramp(t, -3, 3) : t >= -12 ? 1 : 1 - ramp(-t, 12, 24));
   const windScore = g => 1 - ramp(g, 25, 70);
@@ -99,12 +136,51 @@ footer p{margin:4px 0}
   const visScore = (cloud, visMin) => clamp(1 - 0.6 * (cloud / 100) - 0.6 * ramp(1000 - visMin, 0, 800));
 
   const dowOf = d => new Date(d + 'T12:00:00Z').getUTCDay();
-  const crowdScore = d => (PEAK_MD.includes(d.slice(5)) ? 0 : CROWD_BY_DOW[dowOf(d)]);
+  function holidayKind(d) {
+    for (const [a, b, k] of HOLIDAYS) if (d >= a && d <= b) return k;
+    return null;
+  }
+  function crowdScore(d) {
+    const k = holidayKind(d);
+    if (k === 'peak') return 0;
+    const base = CROWD_BY_DOW[dowOf(d)];
+    return k === 'school' ? Math.min(base, 0.3) : base;
+  }
+
+  function classifySnow(o) {
+    if (o.depth < 0.1) return 'yok';
+    if (o.rain >= 0.5 || o.tMean > 1.5) return 'islak';
+    if (o.thawPrev && o.nightMin < -2) return 'buzlu';
+    if (o.fresh >= 8 && o.tMean < -1) return 'toz';
+    if (o.tMax > 0.5 && o.sunFrac > 0.4) return 'yumuşak';
+    return 'sıkışık';
+  }
+
+  // Kategori: ISO 12312-1 (1: %43-80, 2: %18-43, 3: %8-18)
+  function goggle(m, sunFrac) {
+    if (m.visMin < 1500 || m.snowDuring >= 1.5 || (m.cloud >= 85 && sunFrac < 0.15))
+      return { id: 'duz', name: 'Sarı / turuncu', cat: 1, vlt: '%43-80', color: '#f0b429', why: 'düz ışık / kar yağışı' };
+    if (sunFrac >= 0.6 && m.cloud < 50)
+      return { id: 'gunesli', name: 'Koyu gri / ayna', cat: 3, vlt: '%8-18', color: '#3b4350', why: 'parlak güneş' };
+    return { id: 'degisken', name: 'Gül / bakır', cat: 2, vlt: '%18-43', color: '#c26b4a', why: 'değişken ışık' };
+  }
+
+  function makeTips(d) {
+    const m = d.metrics, t = [];
+    if (m.gust >= 50) t.push('Rüzgar güçlü: üst liftler kapanabilir, alt kotlarda kay.');
+    if (d.snowType === 'buzlu') t.push('Sabah pist sert/buzlu; 11:00 sonrası yumuşar.');
+    if (d.snowType === 'yumuşak' || (m.sunFrac > 0.6 && m.tMax > 0)) t.push('Güney bakılı yamaçlar öğleden sonra ıslanır; kuzey bakılıları seç.');
+    if (d.goggle.id === 'duz') t.push('Düz ışık: kabartıları seçmek zor, temkinli kay.');
+    if (m.uvMax >= 4 && m.sunFrac > 0.4) t.push(`UV ${Math.round(m.uvMax)}: SPF 50 + gözlük şart.`);
+    if (m.fresh >= 15) t.push('Taze kar: toz için sabah erken git.');
+    return t.slice(0, 2);
+  }
 
   function analyzeDay(h, idx, date, profile) {
     const i9 = idx.get(date + 'T09:00');
     if (i9 === undefined) return null;
     const win = k => (h[k] ? h[k].slice(i9, i9 + DAY_HOURS) : []);
+    const prev = (k, n) => (h[k] ? h[k].slice(Math.max(0, i9 - n), i9) : []);
 
     const temps = win('temperature_2m');
     const gusts = win('wind_gusts_10m');
@@ -113,7 +189,7 @@ footer p{margin:4px 0}
     const rains = win('rain');
     const showers = win('showers');
 
-    const fresh = sum((h.snowfall || []).slice(Math.max(0, i9 - 36), i9));
+    const fresh = sum(prev('snowfall', 36));
     const snowDuring = sum(win('snowfall'));
     const depth = (h.snow_depth && h.snow_depth[i9]) || 0;
     const tMean = avg(temps);
@@ -122,6 +198,12 @@ footer p{margin:4px 0}
     const cloud = avg(clouds);
     const visMin = minOf(vis, 10000);
     const rain = sum(rains) + sum(showers);
+
+    const sunHours = h.sunshine_duration ? sum(win('sunshine_duration')) / 3600 : DAY_HOURS * (1 - cloud / 100);
+    const sunFrac = clamp(sunHours / DAY_HOURS);
+    const uvMax = h.uv_index ? maxOf(win('uv_index'), 0) : 0;
+    const nightMin = minOf(prev('temperature_2m', 9), tMean);
+    const thawPrev = maxOf(prev('temperature_2m', 36), -99) > 1 || sum(prev('rain', 36)) > 0.3;
 
     const parts = {
       fresh: freshScore(fresh),
@@ -134,6 +216,10 @@ footer p{margin:4px 0}
 
     let total = 0;
     for (const k of Object.keys(parts)) total += profile[k] * parts[k];
+
+    const metrics = { fresh, snowDuring, depth, tMean, tMax, gust, cloud, visMin, rain, sunHours, sunFrac, uvMax, nightMin };
+    const snowType = classifySnow({ depth, fresh, tMean, tMax, nightMin, thawPrev, rain, sunFrac });
+    total *= SNOW_TYPES[snowType].q;
 
     const flags = [];
     if (rain >= 0.5) { total *= Math.max(0.4, 1 - rain / 8); flags.push('rain'); }
@@ -157,17 +243,23 @@ footer p{margin:4px 0}
       if (a > bestAvg) { bestAvg = a; best = s; }
     }
 
-    return {
+    const day = {
       date,
       dow: dowOf(date),
       total: Math.round(clamp(total, 0, 100)),
       parts,
-      metrics: { fresh, snowDuring, depth, tMean, tMax, gust, cloud, visMin, rain },
+      metrics,
       flags,
+      snowType,
+      snowLabel: SNOW_TYPES[snowType].label,
+      goggle: goggle(metrics, sunFrac),
+      holiday: holidayKind(date),
       hourly,
       hourStart: DAY_START,
       window: { from: DAY_START + best, to: DAY_START + best + 3 }
     };
+    day.tips = makeTips(day);
+    return day;
   }
 
   function analyzeResort(hourly, profileKey, todayStr) {
@@ -190,20 +282,7 @@ footer p{margin:4px 0}
 
   const label = s => (s >= 80 ? 'Mükemmel' : s >= 65 ? 'İyi' : s >= 45 ? 'Orta' : s >= 25 ? 'Zayıf' : 'Uygun değil');
 
-  function describe(day) {
-    const m = day.metrics, r = [];
-    if (day.flags.includes('nosnow')) r.push('kar yetersiz');
-    else r.push(`taban ${Math.round(m.depth * 100)} cm`);
-    if (m.fresh >= 2) r.push(`${Math.round(m.fresh)} cm taze kar`);
-    r.push(`${Math.round(m.tMean)}°C`);
-    r.push(`rüzgar ${Math.round(m.gust)} km/s`);
-    if (day.flags.includes('rain')) r.push('yağmur riski');
-    if (day.flags.includes('lifts')) r.push('lift kapanabilir');
-    if (day.parts.crowd <= 0.35) r.push('kalabalık');
-    return r;
-  }
-
-  const api = { PROFILES, analyzeDay, analyzeResort, bestDays, label, describe, dowOf, tempScore, windScore };
+  const api = { PROFILES, SNOW_TYPES, analyzeDay, analyzeResort, bestDays, label, dowOf, holidayKind, crowdScore, classifySnow, goggle, tempScore, windScore };
   root.SkiEngine = api;
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
 })(typeof window !== 'undefined' ? window : globalThis);
@@ -233,7 +312,7 @@ footer p{margin:4px 0}
     return resorts.map((r, ri) => {
       const rnd = mulberry32(seedBase + ri * 977);
       const mid = (r.base + r.top) / 2;
-      const out = { time: [], temperature_2m: [], snowfall: [], snow_depth: [], rain: [], showers: [], cloud_cover: [], wind_gusts_10m: [], visibility: [], freezing_level_height: [] };
+      const out = { time: [], temperature_2m: [], snowfall: [], snow_depth: [], rain: [], showers: [], cloud_cover: [], wind_gusts_10m: [], visibility: [], freezing_level_height: [], sunshine_duration: [], uv_index: [] };
       let depth = Math.max(0.05, 0.2 + (mid - 1700) / 2500);
       const phase = rnd() * 6.28;
       for (let d = 0; d < pastDays + days; d++) {
@@ -265,6 +344,10 @@ footer p{margin:4px 0}
           out.wind_gusts_10m.push(r1(windBase * (1.3 + rnd() * 0.6)));
           out.visibility.push(snow > 0.5 ? Math.round(600 + rnd() * 1500) : Math.round(12000 + rnd() * 8000));
           out.freezing_level_height.push(Math.round(mid + t * 150));
+          const elev = h >= 7 && h <= 17 ? Math.sin(Math.PI * (h - 7) / 10) : 0;
+          const cl = out.cloud_cover[out.cloud_cover.length - 1];
+          out.sunshine_duration.push(Math.round(3600 * elev * Math.max(0, 1 - cl / 100 + (rnd() - 0.5) * 0.2)));
+          out.uv_index.push(r1(3 * elev * (1 - 0.7 * cl / 100)));
         }
       }
       return out;
@@ -275,20 +358,153 @@ footer p{margin:4px 0}
   if (typeof module !== 'undefined' && module.exports) module.exports = root.SkiDemo;
 })(typeof window !== 'undefined' ? window : globalThis);
 
+(function (root) {
+  'use strict';
+
+  // Tahmini maliyet modeli. Canlı bilet fiyatı DEĞİLDİR.
+  // Kalibrasyon (Kasım 2026 örnekleri): benzin ~71 TL/lt (İstanbul), otobüs ~1,2 TL/km'den başlıyor,
+  // uçak tek yön kişi başı ~1.000-5.000 TL. Fiyatlar sık değişir: sabitleri güncelle.
+  const CONFIG = {
+    updated: '2026-11-24',
+    roadFactor: 1.3,
+    fuel: { priceLow: 70, priceHigh: 76, lPer100Low: 6, lPer100High: 9 }, // benzin, TL/lt
+    bus: { perKmLow: 1.2, perKmHigh: 2.8, floorLow: 300, floorHigh: 450, minKm: 100 },
+    air: { baseLow: 400, perKm: 1.4, highMult: 2.5, minKm: 300 }
+  };
+
+  const ORIGINS = [
+    { id: 'istanbul', name: 'İstanbul', lat: 41.01, lon: 28.98, airport: true },
+    { id: 'ankara', name: 'Ankara', lat: 39.93, lon: 32.86, airport: true },
+    { id: 'izmir', name: 'İzmir', lat: 38.42, lon: 27.14, airport: true },
+    { id: 'bursa', name: 'Bursa', lat: 40.19, lon: 29.06, airport: false },
+    { id: 'kocaeli', name: 'Kocaeli', lat: 40.77, lon: 29.94, airport: false },
+    { id: 'eskisehir', name: 'Eskişehir', lat: 39.78, lon: 30.52, airport: false },
+    { id: 'antalya', name: 'Antalya', lat: 36.90, lon: 30.69, airport: true },
+    { id: 'adana', name: 'Adana', lat: 37.00, lon: 35.32, airport: true },
+    { id: 'konya', name: 'Konya', lat: 37.87, lon: 32.48, airport: true },
+    { id: 'kayseri', name: 'Kayseri', lat: 38.73, lon: 35.48, airport: true },
+    { id: 'samsun', name: 'Samsun', lat: 41.29, lon: 36.33, airport: true },
+    { id: 'trabzon', name: 'Trabzon', lat: 41.00, lon: 39.72, airport: true }
+  ];
+
+  // Pist başına: en yakın şehir (otobüs son durağı) ve yaklaşık mesafe; uçuş için havalimanı şehri.
+  const ACCESS = {
+    uludag: { hub: 'Bursa', hubKm: 35, airport: null },
+    erciyes: { hub: 'Kayseri', hubKm: 25, airport: 'Kayseri' },
+    palandoken: { hub: 'Erzurum', hubKm: 10, airport: 'Erzurum' },
+    kartalkaya: { hub: 'Bolu', hubKm: 38, airport: null },
+    sarikamis: { hub: 'Kars', hubKm: 55, airport: 'Kars' },
+    ilgaz: { hub: 'Kastamonu', hubKm: 55, airport: null },
+    kartepe: { hub: 'İzmit', hubKm: 20, airport: null },
+    davraz: { hub: 'Isparta', hubKm: 17, airport: null }
+  };
+  const AIRPORT_COORDS = { Kayseri: [38.77, 35.50], Erzurum: [39.96, 41.17], Kars: [40.56, 43.11] };
+
+  // Deniz geçişi nedeniyle kuş uçuşu yanıltıcı olan çiftler (yaklaşık km).
+  const ROAD_OVERRIDES = { 'istanbul|uludag': 280, 'kocaeli|uludag': 150, 'istanbul|kartalkaya': 300, 'ankara|kartalkaya': 230 };
+
+  function haversine(lat1, lon1, lat2, lon2) {
+    const R = 6371, rad = Math.PI / 180;
+    const dLat = (lat2 - lat1) * rad, dLon = (lon2 - lon1) * rad;
+    const a = Math.sin(dLat / 2) ** 2 + Math.cos(lat1 * rad) * Math.cos(lat2 * rad) * Math.sin(dLon / 2) ** 2;
+    return 2 * R * Math.asin(Math.sqrt(a));
+  }
+  const round50 = x => Math.round(x / 50) * 50;
+  const mid = m => (m.low + m.high) / 2;
+
+  function roadKm(origin, resort) {
+    const o = ROAD_OVERRIDES[origin.id + '|' + resort.id];
+    if (o) return o;
+    return Math.round(haversine(origin.lat, origin.lon, resort.lat, resort.lon) * CONFIG.roadFactor);
+  }
+
+  function estimate(originId, resort, pax = 1) {
+    const origin = ORIGINS.find(o => o.id === originId);
+    if (!origin) return null;
+    const acc = ACCESS[resort.id] || { hub: resort.name, hubKm: 0, airport: null };
+    const km = roadKm(origin, resort);
+    const modes = [];
+    const n = Math.max(1, pax);
+
+    if (km <= 15) return { origin, km, hub: acc, modes: [], cheapest: null, pax: n, local: true };
+
+    const f = CONFIG.fuel;
+    modes.push({
+      id: 'car', name: 'Araç', icon: '🚗',
+      low: round50(km * (f.lPer100Low / 100) * f.priceLow / n),
+      high: round50(km * (f.lPer100High / 100) * f.priceHigh / n),
+      note: n > 1 ? 'yakıt, kişi başı (paylaşımlı); otoyol/köprü hariç' : 'yakıt; otoyol/köprü hariç'
+    });
+
+    if (km >= CONFIG.bus.minKm) {
+      const b = CONFIG.bus, bk = Math.max(50, km - acc.hubKm);
+      modes.push({
+        id: 'bus', name: 'Otobüs', icon: '🚌',
+        low: round50(Math.max(b.floorLow, bk * b.perKmLow)),
+        high: round50(Math.max(b.floorHigh, bk * b.perKmHigh)),
+        note: `${acc.hub} otogarına; pist son etabı (~${acc.hubKm} km) ayrıca`
+      });
+    }
+
+    if (origin.airport && acc.airport && origin.name !== acc.airport) {
+      const ap = AIRPORT_COORDS[acc.airport];
+      const air = Math.round(haversine(origin.lat, origin.lon, ap[0], ap[1]));
+      if (air >= CONFIG.air.minKm) {
+        const low = CONFIG.air.baseLow + CONFIG.air.perKm * air;
+        modes.push({
+          id: 'air', name: 'Uçak', icon: '✈',
+          low: round50(low), high: round50(low * CONFIG.air.highMult),
+          note: `${acc.airport} havalimanına; pist transferi ayrıca`
+        });
+      }
+    }
+
+    const cheapest = [...modes].sort((a, b) => mid(a) - mid(b))[0].id;
+    return { origin, km, hub: acc, modes, cheapest, pax: n, local: false };
+  }
+
+  const fmtTL = x => x.toLocaleString('tr-TR');
+  const fmtRange = m => `${fmtTL(m.low)}–${fmtTL(m.high)} TL`;
+
+  function searchQuery(est, mode) {
+    const o = est.origin.name;
+    if (mode.id === 'bus') return `${o} ${est.hub.hub} otobüs bileti`;
+    if (mode.id === 'air') return `${o} ${est.hub.airport || est.hub.hub} uçak bileti`;
+    return `${o} ${est.hub.hub} yol tarifi`;
+  }
+
+  const api = { CONFIG, ORIGINS, ACCESS, estimate, roadKm, haversine, fmtRange, searchQuery };
+  root.SkiTravel = api;
+  if (typeof module !== 'undefined' && module.exports) module.exports = api;
+})(typeof window !== 'undefined' ? window : globalThis);
+
 (function () {
   'use strict';
-  const E = window.SkiEngine, D = window.SkiDemo, RESORTS = window.RESORTS;
+  const E = window.SkiEngine, D = window.SkiDemo, T = window.SkiTravel, RESORTS = window.RESORTS;
   const TZ = 'Europe/Istanbul';
-  const HOURLY = 'temperature_2m,snowfall,snow_depth,rain,showers,cloud_cover,wind_gusts_10m,visibility,freezing_level_height';
+  const HOURLY = 'temperature_2m,snowfall,snow_depth,rain,showers,cloud_cover,wind_gusts_10m,visibility,freezing_level_height,sunshine_duration,uv_index';
   const todayStr = new Intl.DateTimeFormat('en-CA', { timeZone: TZ }).format(new Date());
   const DOW = ['Paz', 'Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt'];
   const MON = ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'];
   const PROFILE_LABELS = { dengeli: 'Dengeli', powder: 'Toz kar', rahat: 'Güneşli / sakin' };
+  const SNOW_ICON = { toz: '❄', 'sıkışık': '⛷', 'yumuşak': '🌤', buzlu: '🧊', islak: '💧', yok: '🚫' };
   const dark = !!(window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches);
 
-  const state = { resortId: 'uludag', profile: 'dengeli', view: 'resort', sel: 0, rankDay: 'best', source: 'demo', updated: '', raw: null };
+  const store = {
+    get(k, d) { try { const v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
+    set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* kullanılamıyor */ } }
+  };
+
+  const favs = new Set(store.get('ski-fav', []));
+  const lastId = store.get('ski-last', null);
+  const startId = RESORTS.some(r => r.id === lastId) ? lastId : ([...favs][0] || 'uludag');
+  const state = { resortId: startId, profile: store.get('ski-profile', 'dengeli'), view: 'resort', sel: 0, rankDay: 'best', source: 'demo', updated: '', raw: null, origin: store.get('ski-origin', 'istanbul'), pax: store.get('ski-pax', 1) };
+  if (!T.ORIGINS.some(o => o.id === state.origin)) state.origin = 'istanbul';
+  if (![1, 2, 3, 4].includes(state.pax)) state.pax = 1;
+  if (!PROFILE_LABELS[state.profile]) state.profile = 'dengeli';
   let analysis = [];
 
+  const f1 = x => x.toFixed(1).replace('.', ',');
   const dayNum = d => Number(d.slice(8, 10));
   const longDate = d => `${DOW[E.dowOf(d)]} ${dayNum(d)} ${MON[Number(d.slice(5, 7)) - 1]}`;
   const cur = () => analysis.find(a => a.resort.id === state.resortId);
@@ -321,7 +537,7 @@ footer p{margin:4px 0}
 
   async function load() {
     try {
-      const c = JSON.parse(sessionStorage.getItem('ski-cache') || 'null');
+      const c = JSON.parse(sessionStorage.getItem('ski-cache2') || 'null');
       if (c && c.day === todayStr && Date.now() - c.t < 3600000) {
         state.raw = c.raw; state.source = 'live'; state.updated = c.u; return;
       }
@@ -330,7 +546,7 @@ footer p{margin:4px 0}
       state.raw = await fetchLive();
       state.source = 'live';
       state.updated = new Intl.DateTimeFormat('tr-TR', { timeZone: TZ, hour: '2-digit', minute: '2-digit' }).format(new Date());
-      try { sessionStorage.setItem('ski-cache', JSON.stringify({ day: todayStr, t: Date.now(), u: state.updated, raw: state.raw })); } catch (e) { /* kota */ }
+      try { sessionStorage.setItem('ski-cache2', JSON.stringify({ day: todayStr, t: Date.now(), u: state.updated, raw: state.raw })); } catch (e) { /* kota */ }
     } catch (e) {
       state.raw = D.makeDemo(RESORTS, todayStr);
       state.source = 'demo';
@@ -342,54 +558,92 @@ footer p{margin:4px 0}
   }
   const bestOffset = () => E.bestDays(cur().days, 1)[0].offset;
 
-  function card(d, rank) {
-    return `<button class="card" data-act="pick" data-i="${d.offset}">
-      <div class="rk">${rank}</div>
-      <div class="cd"><b>${longDate(d.date)}</b>
-        <span class="mut">${E.label(d.total)} · en iyi saat ${d.window.from}:00–${d.window.to}:00</span>
-        <span class="mut sm">${E.describe(d).slice(0, 4).join(' · ')}</span></div>
-      <div class="sc" style="${col(d.total)}">${d.total}</div></button>`;
+  function hero(d, rank) {
+    const m = d.metrics, g = d.goggle;
+    const tip = d.tips.length ? `<p class="tip">💡 ${d.tips.join(' ')}</p>` : '';
+    return `<section class="hero">
+      <div class="hl"><div class="ring" style="${col(d.total)}">${d.total}</div><div class="lab">${E.label(d.total)}</div></div>
+      <div class="hr">
+        <div class="hd"><b>${longDate(d.date)}${rank ? ' ★' + rank : ''}</b><span>⏱ ${d.window.from}:00–${d.window.to}:00</span></div>
+        <div class="chips">
+          <span class="chip">${SNOW_ICON[d.snowType]} ${d.snowLabel}</span>
+          <span class="chip">☀ ${f1(m.sunHours)} sa${m.uvMax >= 1 ? ' · UV ' + Math.round(m.uvMax) : ''}</span>
+          ${d.holiday ? '<span class="chip h">🎉 tatil, kalabalık</span>' : ''}
+        </div>
+        <div class="met">❄ ${Math.round(m.fresh)} cm taze · taban ${Math.round(m.depth * 100)} cm · ${Math.round(m.tMean)}°C · 💨 ${Math.round(m.gust)} km/s</div>
+        <div class="gog">🕶 <i class="dot" style="background:${g.color}"></i><span><b>${g.name}</b> · Kat. ${g.cat} (${g.vlt}) · ${g.why}</span></div>
+      </div></section>${tip}`;
   }
 
-  function tile(d) {
+  function tile(d, topSet) {
     const cls = 'tile' + (d.confidence === 'düşük' ? ' lowc' : '') + (d.offset === state.sel ? ' sel' : '');
     return `<button class="${cls}" style="${col(d.total)}" data-act="pick" data-i="${d.offset}" aria-label="${longDate(d.date)}, skor ${d.total}">
-      <span class="tw">${DOW[d.dow]}</span><span class="td">${dayNum(d.date)}</span><span class="ts">${d.total}</span></button>`;
+      <span class="tw">${DOW[d.dow]} ${dayNum(d.date)}</span><span class="ts">${d.total}${topSet.has(d.offset) ? '<i class="star">★</i>' : ''}</span></button>`;
   }
 
-  function detail(d) {
+  function factors(d) {
     const m = d.metrics, p = d.parts;
     const crowd = p.crowd >= 0.9 ? 'düşük' : p.crowd >= 0.5 ? 'orta' : 'yüksek';
     const rows = [
-      ['Taze kar', p.fresh, `${Math.round(m.fresh)} cm (önceki 36 saat)`],
-      ['Taban kar', p.base, `${Math.round(m.depth * 100)} cm`],
-      ['Sıcaklık', p.temp, `ort. ${m.tMean.toFixed(0)}°C, maks ${m.tMax.toFixed(0)}°C`],
-      ['Rüzgar', p.wind, `maks esme ${Math.round(m.gust)} km/s`],
-      ['Görüş / güneş', p.vis, `bulut %${Math.round(m.cloud)}`],
-      ['Kalabalık', p.crowd, crowd + ' yoğunluk beklentisi']
-    ].map(([n, v, t]) => `<div class="fac"><span>${n}</span><div class="bar"><i style="width:${Math.round(v * 100)}%"></i></div><small>${t}</small></div>`).join('');
+      ['Taze kar', p.fresh, `${Math.round(m.fresh)} cm`],
+      ['Taban', p.base, `${Math.round(m.depth * 100)} cm`],
+      ['Sıcaklık', p.temp, `${Math.round(m.tMean)}° / ${Math.round(m.tMax)}°`],
+      ['Rüzgar', p.wind, `${Math.round(m.gust)} km/s`],
+      ['Görüş/güneş', p.vis, `%${Math.round(m.cloud)} bulut`],
+      ['Kalabalık', p.crowd, crowd]
+    ].map(([n, v, t]) => `<div class="fac"><div class="t"><span>${n}</span><span>${t}</span></div><div class="bar"><i style="width:${Math.round(v * 100)}%"></i></div></div>`).join('');
     const hours = d.hourly.map((v, k) => {
       const h = d.hourStart + k, w = h >= d.window.from && h < d.window.to;
-      return `<div class="hb${w ? ' w' : ''}"><div class="b"><i style="height:${Math.max(5, v)}%"></i></div><span>${h}</span></div>`;
+      return `<div class="hb${w ? ' w' : ''}"><div class="b"><i style="height:${Math.max(6, v)}%"></i></div><span>${h}</span></div>`;
     }).join('');
-    const warn = d.confidence === 'düşük' ? '<div class="note">8+ gün sonrası tahmin: güvenilirlik düşük, değişebilir.</div>' : '';
-    return `<div class="panel" id="detail">
-      <header><b>${longDate(d.date)} · ${E.label(d.total)}</b><span class="sc" style="${col(d.total)}">${d.total}</span></header>
-      <div class="note" style="margin:0 0 6px">Tahmin güveni: ${d.confidence}</div>
-      ${rows}
-      <h2 style="margin:12px 0 4px">Saatlik uygunluk (vurgulu: en iyi 3 saat)</h2>
-      <div class="hours">${hours}</div>${warn}</div>`;
+    return `<div class="panel"><div class="facs">${rows}</div>
+      <div class="hours">${hours}</div>
+      <div class="hcap">Saatlik uygunluk (koyu: en iyi 3 saat) · güven: ${d.confidence}${d.confidence === 'düşük' ? ' (değişebilir)' : ''}</div></div>`;
+  }
+
+
+  function travelCard(r) {
+    const est = T.estimate(state.origin, r, state.pax);
+    const oOpts = T.ORIGINS.map(o => `<option value="${o.id}"${o.id === state.origin ? ' selected' : ''}>${o.name}</option>`).join('');
+    const pOpts = [1, 2, 3, 4].map(n => `<option value="${n}"${n === state.pax ? ' selected' : ''}>${n} kişi</option>`).join('');
+    let body;
+    if (est.local) {
+      body = `<div class="tr1">Şehir içi: ~${est.km} km, ${est.modes.length ? '🚗 ' + T.fmtRange(est.modes[0]) : 'kısa mesafe'}</div>`;
+    } else {
+      const ch = est.modes.find(m => m.id === est.cheapest);
+      const others = est.modes.filter(m => m !== ch).map(m => `${m.icon} ${T.fmtRange(m)}`).join(' · ');
+      const q = 'https://www.google.com/search?q=' + encodeURIComponent(T.searchQuery(est, ch));
+      body = `<div class="tr1"><b>En ucuz: ${ch.icon} ${ch.name} ~${T.fmtRange(ch)}</b>${ch.id !== 'car' ? ` <a href="${q}" target="_blank" rel="noopener">fiyat ara ›</a>` : ''}</div>
+        <div class="tr2">${others ? others + ' · ' : ''}~${est.km} km · ${ch.note}</div>`;
+    }
+    return `<div class="panel trv"><div class="trh"><span>🧳 Ulaşım (tek yön, kişi başı, tahmini)</span>
+      <select id="origin" aria-label="Çıkış şehri">${oOpts}</select><select id="pax" aria-label="Kişi sayısı">${pOpts}</select></div>${body}</div>`;
+  }
+
+  function links(r) {
+    const nav = `https://www.google.com/maps/dir/?api=1&destination=${r.lat},${r.lon}`;
+    const st = 'https://www.google.com/search?q=' + encodeURIComponent(r.name + ' kayak merkezi pist durumu');
+    return `<div class="links"><a href="${nav}" target="_blank" rel="noopener">🧭 Yol tarifi</a>
+      <a href="${st}" target="_blank" rel="noopener">🚡 Pist durumu</a>
+      <details style="flex:1"><summary>ⓘ Notlar</summary></details></div>
+      <div class="notes" id="notes" hidden>
+        <p>Skor model tahminine dayanır: taze kar, taban, sıcaklık, rüzgar, görüş, kalabalık. Lift/pist açık-kapalı durumu yoktur; "Pist durumu" bağlantısı arama açar.</p>
+        <p>Kar tipi ve gözlük önerisi kural tabanlıdır. Pist bakısı (kuzey/güney) pist bazında eklenmedi; ipuçları geneldir.</p>
+        <p>Ulaşım: Kasım 2026 örneklerinden kalibre tahmin (benzin ~71 TL/lt, otobüs ~1,2 TL/km'den, uçak ~1.000-5.000 TL). Gerçek bilet fiyatı değişir; otoyol/köprü ücreti ve pist son etabı hariç.</p>
+        <p>Kot ve koordinatlar yaklaşık. Kalabalık: hafta sonu, yılbaşı, MEB yarıyıl ve mart ara tatili. 8+ gün tahmin güvenilirliği düşüktür.</p></div>`;
   }
 
   function resortView() {
-    const days = cur().days;
+    const a = cur(), days = a.days;
     const top = E.bestDays(days, 3);
+    const topSet = new Set(top.map(d => d.offset));
     const sel = days.find(d => d.offset === state.sel) || days[0];
-    return `<h2>En iyi günler</h2>${top.map((d, i) => card(d, i + 1)).join('')}
-      ${top[0].total < 25 ? '<div class="warn">Önümüzdeki 14 günde bu pist için uygun gün görünmüyor.</div>' : ''}
-      <h2>14 günlük görünüm</h2><div class="grid">${days.map(tile).join('')}</div>
-      <p class="legend">Kesikli çerçeve: düşük güvenli tahmin (8+ gün)</p>
-      <h2>Gün detayı</h2>${detail(sel)}`;
+    const rank = top.findIndex(d => d.offset === sel.offset) + 1;
+    return `${hero(sel, rank)}
+      ${top[0].total < 25 ? '<div class="warn">14 günde bu pist için uygun gün görünmüyor.</div>' : ''}
+      <div class="grid">${days.map(d => tile(d, topSet)).join('')}</div>
+      <p class="legend">★ en iyi 3 gün · kesikli: düşük güven (8+ gün)</p>
+      ${factors(sel)}${travelCard(a.resort)}${links(a.resort)}`;
   }
 
   function rankView() {
@@ -399,49 +653,47 @@ footer p{margin:4px 0}
       .filter(x => x.d)
       .sort((x, y) => y.d.total - x.d.total)
       .map(({ a, d }) => `<button class="row" data-act="goto" data-r="${a.resort.id}" data-i="${d.offset}">
-        <div class="cd"><b>${a.resort.name} <span class="mut">${a.resort.region}</span></b>
-          <span class="mut sm">${state.rankDay === 'best' ? longDate(d.date) + ' · ' : ''}${E.describe(d).slice(0, 3).join(' · ')}</span></div>
+        <div class="cd"><b>${a.resort.name} <span class="mut">${a.resort.region}</span>${favs.has(a.resort.id) ? ' ★' : ''}</b>
+          <span class="mut sm">${state.rankDay === 'best' ? longDate(d.date) + ' · ' : ''}${SNOW_ICON[d.snowType]} ${d.snowLabel} · <i class="dot" style="background:${d.goggle.color}"></i> K${d.goggle.cat} · ☀ ${f1(d.metrics.sunHours)} sa</span></div>
         <div class="sc" style="${col(d.total)}">${d.total}</div></button>`).join('');
-    return `<h2>Gün seç</h2>
-      <select id="rankday" aria-label="Gün"><option value="best"${state.rankDay === 'best' ? ' selected' : ''}>Her pistin en iyi günü (14 gün)</option>${dayOpts}</select>
-      <h2>Pist sıralaması</h2>${rows}`;
+    return `<select class="rsel" id="rankday" aria-label="Gün"><option value="best"${state.rankDay === 'best' ? ' selected' : ''}>Her pistin en iyi günü (14 gün)</option>${dayOpts}</select>${rows}`;
   }
 
   function render() {
     const y = window.scrollY;
-    const banner = state.source === 'demo'
-      ? '<div class="banner demo"><b>DEMO verisi</b> — canlı tahmin alınamadı. Değerler sentetiktir; gerçek karar için kullanma.</div>'
-      : `<div class="banner live">Canlı veri · Open-Meteo · ${state.updated}</div>`;
-    const resortOpts = RESORTS.map(r => `<option value="${r.id}"${r.id === state.resortId ? ' selected' : ''}>${r.name} (${r.region})</option>`).join('');
+    const demo = state.source === 'demo';
+    const status = demo
+      ? '<div class="status demo"><b>DEMO verisi</b>: canlı tahmin alınamadı, değerler sentetiktir.</div>'
+      : `<div class="status">● Canlı veri · Open-Meteo · ${state.updated}</div>`;
+    const opts = RESORTS.map(r => `<option value="${r.id}"${r.id === state.resortId ? ' selected' : ''}>${favs.has(r.id) ? '★ ' : ''}${r.name} (${r.region})</option>`).join('');
     const seg = Object.keys(PROFILE_LABELS).map(k => `<button class="${k === state.profile ? 'on' : ''}" data-act="profile" data-v="${k}">${PROFILE_LABELS[k]}</button>`).join('');
     document.getElementById('app').innerHTML = `
-      <h1>⛷ Kayak Günü Planlayıcı</h1>${banner}
-      <select id="resort" aria-label="Pist">${resortOpts}</select>
+      <div class="top"><select id="resort" aria-label="Pist">${opts}</select>
+        <button class="ib" data-act="fav" aria-label="Favori">${favs.has(state.resortId) ? '★' : '☆'}</button>
+        <button class="ib${state.view === 'rank' ? ' on' : ''}" data-act="view" data-v="${state.view === 'rank' ? 'resort' : 'rank'}">${state.view === 'rank' ? '← Pist' : '⇅ Sırala'}</button></div>
+      ${status}
       <div class="seg" role="group" aria-label="Tercih profili">${seg}</div>
-      <div class="tabs"><button class="${state.view === 'resort' ? 'on' : ''}" data-act="view" data-v="resort">Pist</button>
-        <button class="${state.view === 'rank' ? 'on' : ''}" data-act="view" data-v="rank">Sıralama</button></div>
-      ${state.view === 'resort' ? resortView() : rankView()}
-      <footer>
-        <p>Skor, model tahmininden hesaplanır (taze kar, taban, sıcaklık, rüzgar, görüş, kalabalık). Lift/pist açık-kapalı durumunu içermez.</p>
-        <p>Kot ve koordinatlar yaklaşık. Kalabalık yalnızca hafta sonu ve yılbaşına göre tahmin edilir; okul tatili tarihleri eklenmedi.</p>
-      </footer>`;
+      ${state.view === 'resort' ? resortView() : rankView()}`;
     window.scrollTo(0, y);
   }
 
   document.addEventListener('click', e => {
+    const s = e.target.closest('summary');
+    if (s) { e.preventDefault(); const n = document.getElementById('notes'); if (n) n.hidden = !n.hidden; return; }
     const b = e.target.closest('[data-act]');
     if (!b) return;
     const act = b.dataset.act;
-    if (act === 'pick') {
-      state.sel = Number(b.dataset.i); render();
-      const el = document.getElementById('detail'); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    } else if (act === 'profile') { state.profile = b.dataset.v; recompute(); render(); }
+    if (act === 'pick') { state.sel = Number(b.dataset.i); render(); }
+    else if (act === 'profile') { state.profile = b.dataset.v; store.set('ski-profile', state.profile); recompute(); render(); }
     else if (act === 'view') { state.view = b.dataset.v; render(); }
-    else if (act === 'goto') { state.resortId = b.dataset.r; state.sel = Number(b.dataset.i); state.view = 'resort'; render(); window.scrollTo(0, 0); }
+    else if (act === 'fav') { favs.has(state.resortId) ? favs.delete(state.resortId) : favs.add(state.resortId); store.set('ski-fav', [...favs]); render(); }
+    else if (act === 'goto') { state.resortId = b.dataset.r; store.set('ski-last', state.resortId); state.sel = Number(b.dataset.i); state.view = 'resort'; render(); window.scrollTo(0, 0); }
   });
   document.addEventListener('change', e => {
-    if (e.target.id === 'resort') { state.resortId = e.target.value; state.sel = bestOffset(); render(); }
+    if (e.target.id === 'resort') { state.resortId = e.target.value; store.set('ski-last', state.resortId); state.sel = bestOffset(); render(); }
     else if (e.target.id === 'rankday') { state.rankDay = e.target.value; render(); }
+    else if (e.target.id === 'origin') { state.origin = e.target.value; store.set('ski-origin', state.origin); render(); }
+    else if (e.target.id === 'pax') { state.pax = Number(e.target.value); store.set('ski-pax', state.pax); render(); }
   });
 
   load().then(() => { recompute(); state.sel = bestOffset(); render(); });
