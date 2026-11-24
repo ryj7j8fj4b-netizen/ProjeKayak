@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kayak Günü Planlayıcı (Türkiye)</title>
+<style>
+:root{--bg:#f4f7f9;--card:#fff;--ink:#10202c;--mut:#566673;--line:#dde4ea;--acc:#1e6fa8;--warn:#8a4b00;--warnbg:#fff1dc;--okbg:#e6f2fa}
+@media (prefers-color-scheme:dark){:root{--bg:#0e1820;--card:#15242e;--ink:#e8eef2;--mut:#9aabb7;--line:#25384a;--acc:#5aa9dc;--warn:#ffc77a;--warnbg:#3a2a10;--okbg:#14303f}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+#app{max-width:520px;margin:0 auto;padding:14px 14px 40px}
+h1{font-size:19px;margin:0 0 10px}
+h2{font-size:14px;margin:18px 0 8px;text-transform:uppercase;letter-spacing:.04em;color:var(--mut)}
+button,select{font:inherit;color:inherit}
+button{cursor:pointer;border:0;background:none;padding:0;text-align:left}
+.banner{border-radius:10px;padding:8px 10px;font-size:13px;margin-bottom:12px}
+.banner.demo{background:var(--warnbg);color:var(--warn)}
+.banner.live{background:var(--okbg);color:var(--ink)}
+select{width:100%;padding:11px 10px;border:1px solid var(--line);border-radius:10px;background:var(--card)}
+.seg{display:flex;gap:6px;margin:10px 0}
+.seg button{flex:1;text-align:center;padding:9px 4px;border:1px solid var(--line);border-radius:10px;background:var(--card);font-size:13px}
+.seg button.on{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
+.tabs{display:flex;border-bottom:1px solid var(--line);margin:14px 0 0}
+.tabs button{flex:1;text-align:center;padding:10px;border-bottom:3px solid transparent;color:var(--mut)}
+.tabs button.on{border-color:var(--acc);color:var(--ink);font-weight:600}
+.card,.row{display:flex;align-items:center;gap:10px;width:100%;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px;margin-bottom:8px}
+.rk{width:22px;font-weight:700;color:var(--mut);text-align:center}
+.cd{flex:1;display:flex;flex-direction:column;min-width:0}
+.mut{color:var(--mut)}.sm{font-size:12.5px}
+.sc{min-width:48px;text-align:center;font-weight:700;font-size:18px;border-radius:10px;padding:8px 0}
+.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+.tile{display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:9px;padding:6px 0;border:2px solid transparent;min-height:62px;text-align:center}
+.tile .tw{font-size:11px;opacity:.85}.tile .td{font-size:13px}.tile .ts{font-size:16px;font-weight:700}
+.tile.lowc{border:2px dashed var(--mut)}
+.tile.sel{outline:3px solid var(--ink);outline-offset:1px}
+.legend{font-size:12px;color:var(--mut);margin:6px 0 0}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px}
+.panel header{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px}
+.fac{display:grid;grid-template-columns:92px 1fr;gap:2px 10px;align-items:center;margin:6px 0}
+.fac .bar{height:8px;background:var(--line);border-radius:4px;overflow:hidden}
+.fac .bar i{display:block;height:100%;background:var(--acc)}
+.fac small{grid-column:2;color:var(--mut);font-size:12px}
+.hours{display:flex;gap:4px;align-items:flex-end;height:84px;margin-top:6px}
+.hb{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;height:100%}
+.hb .b{flex:1;width:100%;display:flex;align-items:flex-end}
+.hb i{display:block;width:100%;background:var(--acc);opacity:.4;border-radius:3px 3px 0 0}
+.hb.w i{opacity:1}
+.hb span{font-size:11px;color:var(--mut)}
+.note{font-size:12.5px;color:var(--mut);margin-top:6px}
+.warn{background:var(--warnbg);color:var(--warn);border-radius:10px;padding:8px 10px;font-size:13px}
+footer{margin-top:22px;font-size:12px;color:var(--mut)}
+footer p{margin:4px 0}
+
+</style>
+</head>
+<body>
+<div id="app"><p>Yükleniyor…</p></div>
+<script>
+(function (root) {
+  root.RESORTS = [
+    { id: 'uludag', name: 'Uludağ', region: 'Bursa', lat: 40.07, lon: 29.22, base: 1750, top: 2500 },
+    { id: 'erciyes', name: 'Erciyes', region: 'Kayseri', lat: 38.53, lon: 35.45, base: 2100, top: 3100 },
+    { id: 'palandoken', name: 'Palandöken', region: 'Erzurum', lat: 39.85, lon: 41.28, base: 2200, top: 3100 },
+    { id: 'kartalkaya', name: 'Kartalkaya', region: 'Bolu', lat: 40.67, lon: 31.79, base: 1850, top: 2255 },
+    { id: 'sarikamis', name: 'Sarıkamış', region: 'Kars', lat: 40.33, lon: 42.57, base: 2100, top: 2600 },
+    { id: 'ilgaz', name: 'Ilgaz', region: 'Çankırı/Kastamonu', lat: 41.07, lon: 33.72, base: 1800, top: 2200 },
+    { id: 'kartepe', name: 'Kartepe', region: 'Kocaeli', lat: 40.65, lon: 30.37, base: 1300, top: 1750 },
+    { id: 'davraz', name: 'Davraz', region: 'Isparta', lat: 37.78, lon: 30.72, base: 1600, top: 2200 }
+  ];
+})(typeof window !== 'undefined' ? window : globalThis);
+
+(function (root) {
+  'use strict';
+
+  const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+  const ramp = (x, x0, x1) => clamp((x - x0) / (x1 - x0));
+  const sum = a => a.reduce((s, v) => s + (v || 0), 0);
+  const avg = a => (a.length ? sum(a) / a.length : 0);
+  const maxOf = (a, d) => (a.length ? Math.max(...a) : d);
+  const minOf = (a, d) => (a.length ? Math.min(...a) : d);
+
+  const PROFILES = {
+    dengeli: { fresh: 25, base: 20, temp: 20, wind: 15, vis: 10, crowd: 10 },
+    powder: { fresh: 40, base: 15, temp: 15, wind: 12, vis: 5, crowd: 13 },
+    rahat: { fresh: 10, base: 20, temp: 20, wind: 15, vis: 20, crowd: 15 }
+  };
+
+  const DAY_START = 9;
+  const DAY_HOURS = 8; // 09:00..16:00
+  const PEAK_MD = ['12-31', '01-01', '01-02']; // tatil tarihleri buraya eklenebilir
+  const CROWD_BY_DOW = [0.35, 0.9, 1, 1, 0.95, 0.75, 0.2]; // Paz..Cmt
+
+  const tempScore = t => (t >= -3 ? 1 - ramp(t, -3, 3) : t >= -12 ? 1 : 1 - ramp(-t, 12, 24));
+  const windScore = g => 1 - ramp(g, 25, 70);
+  const freshScore = cm => ramp(cm, 0, 20);
+  const baseScore = m => ramp(m, 0.1, 0.6);
+  const visScore = (cloud, visMin) => clamp(1 - 0.6 * (cloud / 100) - 0.6 * ramp(1000 - visMin, 0, 800));
+
+  const dowOf = d => new Date(d + 'T12:00:00Z').getUTCDay();
+  const crowdScore = d => (PEAK_MD.includes(d.slice(5)) ? 0 : CROWD_BY_DOW[dowOf(d)]);
+
+  function analyzeDay(h, idx, date, profile) {
+    const i9 = idx.get(date + 'T09:00');
+    if (i9 === undefined) return null;
+    const win = k => (h[k] ? h[k].slice(i9, i9 + DAY_HOURS) : []);
+
+    const temps = win('temperature_2m');
+    const gusts = win('wind_gusts_10m');
+    const clouds = win('cloud_cover');
+    const vis = win('visibility');
+    const rains = win('rain');
+    const showers = win('showers');
+
+    const fresh = sum((h.snowfall || []).slice(Math.max(0, i9 - 36), i9));
+    const snowDuring = sum(win('snowfall'));
+    const depth = (h.snow_depth && h.snow_depth[i9]) || 0;
+    const tMean = avg(temps);
+    const tMax = maxOf(temps, tMean);
+    const gust = maxOf(gusts, 0);
+    const cloud = avg(clouds);
+    const visMin = minOf(vis, 10000);
+    const rain = sum(rains) + sum(showers);
+
+    const parts = {
+      fresh: freshScore(fresh),
+      base: baseScore(depth),
+      temp: tempScore(0.7 * tMean + 0.3 * tMax),
+      wind: windScore(gust),
+      vis: visScore(cloud, visMin),
+      crowd: crowdScore(date)
+    };
+
+    let total = 0;
+    for (const k of Object.keys(parts)) total += profile[k] * parts[k];
+
+    const flags = [];
+    if (rain >= 0.5) { total *= Math.max(0.4, 1 - rain / 8); flags.push('rain'); }
+    if (gust >= 70) flags.push('lifts');
+    if (gust >= 80) total = Math.min(total, 20);
+    if (depth < 0.1) { total = Math.min(total, 15); flags.push('nosnow'); }
+
+    const hourly = [];
+    for (let k = 0; k < DAY_HOURS; k++) {
+      const r = (rains[k] || 0) + (showers[k] || 0);
+      hourly.push(Math.round(100 * (
+        0.35 * tempScore(temps[k] ?? tMean) +
+        0.35 * windScore(gusts[k] ?? gust) +
+        0.2 * visScore(clouds[k] ?? cloud, vis[k] ?? visMin) +
+        0.1 * (1 - ramp(r, 0, 1))
+      )));
+    }
+    let best = 0, bestAvg = -1;
+    for (let s = 0; s + 3 <= DAY_HOURS; s++) {
+      const a = avg(hourly.slice(s, s + 3));
+      if (a > bestAvg) { bestAvg = a; best = s; }
+    }
+
+    return {
+      date,
+      dow: dowOf(date),
+      total: Math.round(clamp(total, 0, 100)),
+      parts,
+      metrics: { fresh, snowDuring, depth, tMean, tMax, gust, cloud, visMin, rain },
+      flags,
+      hourly,
+      hourStart: DAY_START,
+      window: { from: DAY_START + best, to: DAY_START + best + 3 }
+    };
+  }
+
+  function analyzeResort(hourly, profileKey, todayStr) {
+    const profile = PROFILES[profileKey] || PROFILES.dengeli;
+    const idx = new Map(hourly.time.map((t, i) => [t, i]));
+    const dates = [...new Set(hourly.time.map(t => t.slice(0, 10)))].filter(d => d >= todayStr);
+    const out = [];
+    dates.forEach((d, n) => {
+      const a = analyzeDay(hourly, idx, d, profile);
+      if (!a) return;
+      a.offset = n;
+      a.confidence = n <= 3 ? 'yüksek' : n <= 7 ? 'orta' : 'düşük';
+      out.push(a);
+    });
+    return out;
+  }
+
+  const bestDays = (days, n = 3) =>
+    [...days].sort((a, b) => b.total - a.total || a.offset - b.offset).slice(0, n);
+
+  const label = s => (s >= 80 ? 'Mükemmel' : s >= 65 ? 'İyi' : s >= 45 ? 'Orta' : s >= 25 ? 'Zayıf' : 'Uygun değil');
+
+  function describe(day) {
+    const m = day.metrics, r = [];
+    if (day.flags.includes('nosnow')) r.push('kar yetersiz');
+    else r.push(`taban ${Math.round(m.depth * 100)} cm`);
+    if (m.fresh >= 2) r.push(`${Math.round(m.fresh)} cm taze kar`);
+    r.push(`${Math.round(m.tMean)}°C`);
+    r.push(`rüzgar ${Math.round(m.gust)} km/s`);
+    if (day.flags.includes('rain')) r.push('yağmur riski');
+    if (day.flags.includes('lifts')) r.push('lift kapanabilir');
+    if (day.parts.crowd <= 0.35) r.push('kalabalık');
+    return r;
+  }
+
+  const api = { PROFILES, analyzeDay, analyzeResort, bestDays, label, describe, dowOf, tempScore, windScore };
+  root.SkiEngine = api;
+  if (typeof module !== 'undefined' && module.exports) module.exports = api;
+})(typeof window !== 'undefined' ? window : globalThis);
+
+(function (root) {
+  'use strict';
+
+  function mulberry32(a) {
+    return function () {
+      a |= 0; a = (a + 0x6D2B79F5) | 0;
+      let t = Math.imul(a ^ (a >>> 15), 1 | a);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+  const pad = n => String(n).padStart(2, '0');
+  const r1 = x => Math.round(x * 10) / 10;
+  function addDays(dateStr, n) {
+    const d = new Date(dateStr + 'T12:00:00Z');
+    d.setUTCDate(d.getUTCDate() + n);
+    return d.toISOString().slice(0, 10);
+  }
+
+  // Sentetik veri: gerçek tahmin DEĞİLDİR. Yalnızca arayüz/skor testi içindir.
+  function makeDemo(resorts, todayStr, pastDays = 2, days = 14) {
+    const seedBase = Number(todayStr.replace(/-/g, '')) % 100000;
+    return resorts.map((r, ri) => {
+      const rnd = mulberry32(seedBase + ri * 977);
+      const mid = (r.base + r.top) / 2;
+      const out = { time: [], temperature_2m: [], snowfall: [], snow_depth: [], rain: [], showers: [], cloud_cover: [], wind_gusts_10m: [], visibility: [], freezing_level_height: [] };
+      let depth = Math.max(0.05, 0.2 + (mid - 1700) / 2500);
+      const phase = rnd() * 6.28;
+      for (let d = 0; d < pastDays + days; d++) {
+        const date = addDays(todayStr, d - pastDays);
+        const stormy = rnd() < 0.38;
+        const amt = stormy ? 4 + rnd() * 26 : 0;
+        const sh = 2 + Math.floor(rnd() * 14);
+        const sl = 6 + Math.floor(rnd() * 10);
+        const tDay = -(mid - 1500) * 0.005 + 4 * Math.sin(d * 0.7 + phase) + (rnd() - 0.5) * 2 - (stormy ? 2 : 0);
+        const windBase = 10 + rnd() * 20 + (stormy ? 15 : 0);
+        const cloudBase = stormy ? 80 : 15 + rnd() * 55;
+        for (let h = 0; h < 24; h++) {
+          const t = tDay + 3 * Math.sin(((h - 8) / 24) * 2 * Math.PI) + (rnd() - 0.5);
+          const inStorm = stormy && h >= sh && h < sh + sl;
+          let snow = 0, rain = 0;
+          if (inStorm) {
+            const q = (amt / sl) * (0.6 + rnd() * 0.8);
+            if (t < 1.5) snow = q; else rain = q * 0.7;
+          }
+          depth += snow * 0.008 - Math.max(0, t + 1) * 0.0004 - 0.0003 - rain * 0.002;
+          depth = Math.max(0, depth);
+          out.time.push(`${date}T${pad(h)}:00`);
+          out.temperature_2m.push(r1(t));
+          out.snowfall.push(r1(snow));
+          out.snow_depth.push(Math.round(depth * 100) / 100);
+          out.rain.push(r1(rain));
+          out.showers.push(0);
+          out.cloud_cover.push(Math.round(Math.min(100, cloudBase + (rnd() - 0.5) * 20)));
+          out.wind_gusts_10m.push(r1(windBase * (1.3 + rnd() * 0.6)));
+          out.visibility.push(snow > 0.5 ? Math.round(600 + rnd() * 1500) : Math.round(12000 + rnd() * 8000));
+          out.freezing_level_height.push(Math.round(mid + t * 150));
+        }
+      }
+      return out;
+    });
+  }
+
+  root.SkiDemo = { makeDemo };
+  if (typeof module !== 'undefined' && module.exports) module.exports = root.SkiDemo;
+})(typeof window !== 'undefined' ? window : globalThis);
+
+(function () {
+  'use strict';
+  const E = window.SkiEngine, D = window.SkiDemo, RESORTS = window.RESORTS;
+  const TZ = 'Europe/Istanbul';
+  const HOURLY = 'temperature_2m,snowfall,snow_depth,rain,showers,cloud_cover,wind_gusts_10m,visibility,freezing_level_height';
+  const todayStr = new Intl.DateTimeFormat('en-CA', { timeZone: TZ }).format(new Date());
+  const DOW = ['Paz', 'Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt'];
+  const MON = ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'];
+  const PROFILE_LABELS = { dengeli: 'Dengeli', powder: 'Toz kar', rahat: 'Güneşli / sakin' };
+  const dark = !!(window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches);
+
+  const state = { resortId: 'uludag', profile: 'dengeli', view: 'resort', sel: 0, rankDay: 'best', source: 'demo', updated: '', raw: null };
+  let analysis = [];
+
+  const dayNum = d => Number(d.slice(8, 10));
+  const longDate = d => `${DOW[E.dowOf(d)]} ${dayNum(d)} ${MON[Number(d.slice(5, 7)) - 1]}`;
+  const cur = () => analysis.find(a => a.resort.id === state.resortId);
+
+  function col(score) {
+    const t = score / 100;
+    if (dark) return `background:hsl(205 ${15 + 55 * t}% ${16 + 30 * t}%);color:#fff`;
+    const L = 95 - 62 * t;
+    return `background:hsl(205 ${12 + 63 * t}% ${L}%);color:${L < 52 ? '#fff' : '#10202c'}`;
+  }
+
+  async function fetchLive() {
+    const q = new URLSearchParams({
+      latitude: RESORTS.map(r => r.lat).join(','),
+      longitude: RESORTS.map(r => r.lon).join(','),
+      elevation: RESORTS.map(r => Math.round((r.base + r.top) / 2)).join(','),
+      hourly: HOURLY, timezone: TZ, past_days: '2', forecast_days: '14'
+    });
+    const ctl = new AbortController();
+    const to = setTimeout(() => ctl.abort(), 9000);
+    try {
+      const res = await fetch('https://api.open-meteo.com/v1/forecast?' + q, { signal: ctl.signal });
+      const j = await res.json();
+      if (!res.ok || j.error) throw new Error(j.reason || res.status);
+      const arr = Array.isArray(j) ? j : [j];
+      if (arr.length !== RESORTS.length) throw new Error('beklenmeyen yanıt');
+      return arr.map(x => x.hourly);
+    } finally { clearTimeout(to); }
+  }
+
+  async function load() {
+    try {
+      const c = JSON.parse(sessionStorage.getItem('ski-cache') || 'null');
+      if (c && c.day === todayStr && Date.now() - c.t < 3600000) {
+        state.raw = c.raw; state.source = 'live'; state.updated = c.u; return;
+      }
+    } catch (e) { /* önbellek yok */ }
+    try {
+      state.raw = await fetchLive();
+      state.source = 'live';
+      state.updated = new Intl.DateTimeFormat('tr-TR', { timeZone: TZ, hour: '2-digit', minute: '2-digit' }).format(new Date());
+      try { sessionStorage.setItem('ski-cache', JSON.stringify({ day: todayStr, t: Date.now(), u: state.updated, raw: state.raw })); } catch (e) { /* kota */ }
+    } catch (e) {
+      state.raw = D.makeDemo(RESORTS, todayStr);
+      state.source = 'demo';
+    }
+  }
+
+  function recompute() {
+    analysis = RESORTS.map((r, i) => ({ resort: r, days: E.analyzeResort(state.raw[i], state.profile, todayStr) }));
+  }
+  const bestOffset = () => E.bestDays(cur().days, 1)[0].offset;
+
+  function card(d, rank) {
+    return `<button class="card" data-act="pick" data-i="${d.offset}">
+      <div class="rk">${rank}</div>
+      <div class="cd"><b>${longDate(d.date)}</b>
+        <span class="mut">${E.label(d.total)} · en iyi saat ${d.window.from}:00–${d.window.to}:00</span>
+        <span class="mut sm">${E.describe(d).slice(0, 4).join(' · ')}</span></div>
+      <div class="sc" style="${col(d.total)}">${d.total}</div></button>`;
+  }
+
+  function tile(d) {
+    const cls = 'tile' + (d.confidence === 'düşük' ? ' lowc' : '') + (d.offset === state.sel ? ' sel' : '');
+    return `<button class="${cls}" style="${col(d.total)}" data-act="pick" data-i="${d.offset}" aria-label="${longDate(d.date)}, skor ${d.total}">
+      <span class="tw">${DOW[d.dow]}</span><span class="td">${dayNum(d.date)}</span><span class="ts">${d.total}</span></button>`;
+  }
+
+  function detail(d) {
+    const m = d.metrics, p = d.parts;
+    const crowd = p.crowd >= 0.9 ? 'düşük' : p.crowd >= 0.5 ? 'orta' : 'yüksek';
+    const rows = [
+      ['Taze kar', p.fresh, `${Math.round(m.fresh)} cm (önceki 36 saat)`],
+      ['Taban kar', p.base, `${Math.round(m.depth * 100)} cm`],
+      ['Sıcaklık', p.temp, `ort. ${m.tMean.toFixed(0)}°C, maks ${m.tMax.toFixed(0)}°C`],
+      ['Rüzgar', p.wind, `maks esme ${Math.round(m.gust)} km/s`],
+      ['Görüş / güneş', p.vis, `bulut %${Math.round(m.cloud)}`],
+      ['Kalabalık', p.crowd, crowd + ' yoğunluk beklentisi']
+    ].map(([n, v, t]) => `<div class="fac"><span>${n}</span><div class="bar"><i style="width:${Math.round(v * 100)}%"></i></div><small>${t}</small></div>`).join('');
+    const hours = d.hourly.map((v, k) => {
+      const h = d.hourStart + k, w = h >= d.window.from && h < d.window.to;
+      return `<div class="hb${w ? ' w' : ''}"><div class="b"><i style="height:${Math.max(5, v)}%"></i></div><span>${h}</span></div>`;
+    }).join('');
+    const warn = d.confidence === 'düşük' ? '<div class="note">8+ gün sonrası tahmin: güvenilirlik düşük, değişebilir.</div>' : '';
+    return `<div class="panel" id="detail">
+      <header><b>${longDate(d.date)} · ${E.label(d.total)}</b><span class="sc" style="${col(d.total)}">${d.total}</span></header>
+      <div class="note" style="margin:0 0 6px">Tahmin güveni: ${d.confidence}</div>
+      ${rows}
+      <h2 style="margin:12px 0 4px">Saatlik uygunluk (vurgulu: en iyi 3 saat)</h2>
+      <div class="hours">${hours}</div>${warn}</div>`;
+  }
+
+  function resortView() {
+    const days = cur().days;
+    const top = E.bestDays(days, 3);
+    const sel = days.find(d => d.offset === state.sel) || days[0];
+    return `<h2>En iyi günler</h2>${top.map((d, i) => card(d, i + 1)).join('')}
+      ${top[0].total < 25 ? '<div class="warn">Önümüzdeki 14 günde bu pist için uygun gün görünmüyor.</div>' : ''}
+      <h2>14 günlük görünüm</h2><div class="grid">${days.map(tile).join('')}</div>
+      <p class="legend">Kesikli çerçeve: düşük güvenli tahmin (8+ gün)</p>
+      <h2>Gün detayı</h2>${detail(sel)}`;
+  }
+
+  function rankView() {
+    const dayOpts = analysis[0].days.map(d => `<option value="${d.offset}"${String(state.rankDay) === String(d.offset) ? ' selected' : ''}>${longDate(d.date)}</option>`).join('');
+    const rows = analysis
+      .map(a => ({ a, d: state.rankDay === 'best' ? E.bestDays(a.days, 1)[0] : a.days.find(x => x.offset === Number(state.rankDay)) }))
+      .filter(x => x.d)
+      .sort((x, y) => y.d.total - x.d.total)
+      .map(({ a, d }) => `<button class="row" data-act="goto" data-r="${a.resort.id}" data-i="${d.offset}">
+        <div class="cd"><b>${a.resort.name} <span class="mut">${a.resort.region}</span></b>
+          <span class="mut sm">${state.rankDay === 'best' ? longDate(d.date) + ' · ' : ''}${E.describe(d).slice(0, 3).join(' · ')}</span></div>
+        <div class="sc" style="${col(d.total)}">${d.total}</div></button>`).join('');
+    return `<h2>Gün seç</h2>
+      <select id="rankday" aria-label="Gün"><option value="best"${state.rankDay === 'best' ? ' selected' : ''}>Her pistin en iyi günü (14 gün)</option>${dayOpts}</select>
+      <h2>Pist sıralaması</h2>${rows}`;
+  }
+
+  function render() {
+    const y = window.scrollY;
+    const banner = state.source === 'demo'
+      ? '<div class="banner demo"><b>DEMO verisi</b> — canlı tahmin alınamadı. Değerler sentetiktir; gerçek karar için kullanma.</div>'
+      : `<div class="banner live">Canlı veri · Open-Meteo · ${state.updated}</div>`;
+    const resortOpts = RESORTS.map(r => `<option value="${r.id}"${r.id === state.resortId ? ' selected' : ''}>${r.name} (${r.region})</option>`).join('');
+    const seg = Object.keys(PROFILE_LABELS).map(k => `<button class="${k === state.profile ? 'on' : ''}" data-act="profile" data-v="${k}">${PROFILE_LABELS[k]}</button>`).join('');
+    document.getElementById('app').innerHTML = `
+      <h1>⛷ Kayak Günü Planlayıcı</h1>${banner}
+      <select id="resort" aria-label="Pist">${resortOpts}</select>
+      <div class="seg" role="group" aria-label="Tercih profili">${seg}</div>
+      <div class="tabs"><button class="${state.view === 'resort' ? 'on' : ''}" data-act="view" data-v="resort">Pist</button>
+        <button class="${state.view === 'rank' ? 'on' : ''}" data-act="view" data-v="rank">Sıralama</button></div>
+      ${state.view === 'resort' ? resortView() : rankView()}
+      <footer>
+        <p>Skor, model tahmininden hesaplanır (taze kar, taban, sıcaklık, rüzgar, görüş, kalabalık). Lift/pist açık-kapalı durumunu içermez.</p>
+        <p>Kot ve koordinatlar yaklaşık. Kalabalık yalnızca hafta sonu ve yılbaşına göre tahmin edilir; okul tatili tarihleri eklenmedi.</p>
+      </footer>`;
+    window.scrollTo(0, y);
+  }
+
+  document.addEventListener('click', e => {
+    const b = e.target.closest('[data-act]');
+    if (!b) return;
+    const act = b.dataset.act;
+    if (act === 'pick') {
+      state.sel = Number(b.dataset.i); render();
+      const el = document.getElementById('detail'); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    } else if (act === 'profile') { state.profile = b.dataset.v; recompute(); render(); }
+    else if (act === 'view') { state.view = b.dataset.v; render(); }
+    else if (act === 'goto') { state.resortId = b.dataset.r; state.sel = Number(b.dataset.i); state.view = 'resort'; render(); window.scrollTo(0, 0); }
+  });
+  document.addEventListener('change', e => {
+    if (e.target.id === 'resort') { state.resortId = e.target.value; state.sel = bestOffset(); render(); }
+    else if (e.target.id === 'rankday') { state.rankDay = e.target.value; render(); }
+  });
+
+  load().then(() => { recompute(); state.sel = bestOffset(); render(); });
+})();
+
+</script>
+</body>
+</html>
